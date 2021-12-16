@@ -36,7 +36,7 @@
 package net.sourceforge.plantuml.svek;
 
 import java.awt.geom.Dimension2D;
-
+import net.sourceforge.plantuml.cucadiagram.IEntity;
 import net.sourceforge.plantuml.Dimension2DDouble;
 import net.sourceforge.plantuml.Url;
 import net.sourceforge.plantuml.graphic.AbstractTextBlock;
@@ -44,12 +44,13 @@ import net.sourceforge.plantuml.graphic.StringBounder;
 import net.sourceforge.plantuml.graphic.TextBlock;
 import net.sourceforge.plantuml.svek.image.EntityImageState;
 import net.sourceforge.plantuml.ugraphic.UGraphic;
+import net.sourceforge.plantuml.ugraphic.UGroupType;
 import net.sourceforge.plantuml.ugraphic.UStroke;
 import net.sourceforge.plantuml.ugraphic.UTranslate;
 import net.sourceforge.plantuml.ugraphic.color.HColor;
 
 public final class InnerStateAutonom extends AbstractTextBlock implements IEntityImage {
-
+	private final IEntity entity;
 	private final IEntityImage im;
 	private final TextBlock title;
 	private final TextBlock attribute;
@@ -61,8 +62,9 @@ public final class InnerStateAutonom extends AbstractTextBlock implements IEntit
 	private final double rounded;
 	private final double shadowing;
 
-	public InnerStateAutonom(IEntityImage im, TextBlock title, TextBlock attribute, HColor borderColor,
+	public InnerStateAutonom(IEntity entity, IEntityImage im, TextBlock title, TextBlock attribute, HColor borderColor,
 			HColor backColor, Url url, boolean withSymbol, UStroke stroke, double rounded, double shadowing) {
+		this.entity = entity;
 		this.im = im;
 		this.withSymbol = withSymbol;
 		this.title = title;
@@ -76,6 +78,8 @@ public final class InnerStateAutonom extends AbstractTextBlock implements IEntit
 	}
 
 	public void drawU(UGraphic ug) {
+		ug.startGroup(UGroupType.ID, this.entity.getIdent().toString("."));
+
 		final Dimension2D text = title.calculateDimension(ug.getStringBounder());
 		final Dimension2D attr = attribute.calculateDimension(ug.getStringBounder());
 		final Dimension2D total = calculateDimension(ug.getStringBounder());
@@ -105,6 +109,8 @@ public final class InnerStateAutonom extends AbstractTextBlock implements IEntit
 		if (url != null) {
 			ug.closeUrl();
 		}
+
+		ug.closeGroup();
 	}
 
 	private double getSpaceYforURL(StringBounder stringBounder) {

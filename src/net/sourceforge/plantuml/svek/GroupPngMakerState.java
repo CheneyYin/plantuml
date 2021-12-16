@@ -211,7 +211,7 @@ public final class GroupPngMakerState {
 		if (stroke == null) {
 			stroke = new UStroke(1.5);
 		}
-		return new InnerStateAutonom(image, title, attribute, borderColor, backColor, group.getUrl99(), withSymbol,
+		return new InnerStateAutonom(this.group, image, title, attribute, borderColor, backColor, group.getUrl99(), withSymbol,
 				stroke, rounded, shadowing);
 
 	}
