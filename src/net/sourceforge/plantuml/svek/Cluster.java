@@ -84,6 +84,7 @@ import net.sourceforge.plantuml.ugraphic.ULine;
 import net.sourceforge.plantuml.ugraphic.URectangle;
 import net.sourceforge.plantuml.ugraphic.UStroke;
 import net.sourceforge.plantuml.ugraphic.UTranslate;
+import net.sourceforge.plantuml.ugraphic.UGroupType;
 import net.sourceforge.plantuml.ugraphic.color.HColor;
 import net.sourceforge.plantuml.ugraphic.color.HColorBackground;
 import net.sourceforge.plantuml.ugraphic.color.HColorUtils;
@@ -311,6 +312,8 @@ public class Cluster implements Moveable {
 		if (group.isHidden()) {
 			return;
 		}
+		ug.startGroup(UGroupType.ID, this.group.getIdent().toString("."));
+	
 		final String fullName = group.getCodeGetName();
 		if (fullName.startsWith("##") == false) {
 			ug.draw(new UComment("cluster " + fullName));
@@ -408,6 +411,7 @@ public class Cluster implements Moveable {
 			if (url != null) {
 				ug.closeUrl();
 			}
+			ug.closeGroup();
 		}
 
 	}
