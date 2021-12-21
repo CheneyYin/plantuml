@@ -633,8 +633,8 @@ public class SvekLine implements Moveable, Hideable, GuideLine {
 			return;
 		}
 		ug.draw(link.commentForSvg());
-		ug.startGroup(UGroupType.CLASS,
-				"link " + link.getEntity1().getCode() + " " + link.getEntity2().getCode() + " selected");
+		ug.startGroup(UGroupType.ID,
+				"link-" + link.getEntity1().getCode() + "-" + link.getEntity2().getCode());
 		double x = 0;
 		double y = 0;
 		final Url url = link.getUrl();
