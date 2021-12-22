@@ -51,6 +51,7 @@ import net.sourceforge.plantuml.svek.SvekNode;
 import net.sourceforge.plantuml.ugraphic.UGraphic;
 import net.sourceforge.plantuml.ugraphic.UStroke;
 import net.sourceforge.plantuml.ugraphic.UTranslate;
+import net.sourceforge.plantuml.ugraphic.UGroupType;
 import net.sourceforge.plantuml.ugraphic.color.HColor;
 
 public class EntityImageStateBorder extends AbstractEntityImageBorder {
@@ -70,6 +71,7 @@ public class EntityImageStateBorder extends AbstractEntityImageBorder {
 	}
 
 	final public void drawU(UGraphic ug) {
+		ug.startGroup(UGroupType.ID, this.getEntity().getIdent().toString("."));
 		double y = 0;
 		final Dimension2D dimDesc = desc.calculateDimension(ug.getStringBounder());
 		final double x = 0 - (dimDesc.getWidth() - 2 * EntityPosition.RADIUS) / 2;
@@ -89,6 +91,7 @@ public class EntityImageStateBorder extends AbstractEntityImageBorder {
 		ug = ug.apply(backcolor.bg());
 
 		entityPosition.drawSymbol(ug, rankdir);
+		ug.closeGroup();
 	}
 
 }
